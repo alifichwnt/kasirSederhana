@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Memasukkan file CSS untuk tata letak dan gaya -->
+  <link rel="stylesheet" type="text/css" href="kasir.css" />
+  <title>Kasir Sederhana</title>
+</head>
+<body>
+
+  <div class="header" style="background: #9CD7F1">
+    <!-- Bagian header dengan latar belakang biru muda -->
+    <h1 align="center" style="background: coral">Kasir Sederhana</h1>
+    <!-- Logo toko atau bisnis -->
+    <div class="logo">
+      <img src="https://github.com/alifichwnt/kasirSederhana/blob/main/download.png?raw=true" alt="Logo">
+    </div>
+    <!-- Formulir untuk input barang -->
+    <form id="kasir">
+      <table>
+        <tr>
+          <th>Nama Barang</th>
+          <th>
+            <!-- Dropdown untuk memilih nama barang -->
+            <select id="nama-barang" onchange="updateHarga()">
+              <option value="Sepatu">Sepatu</option>
+              <option value="Kaus">Kaus</option>
+              <option value="Topi">Topi</option>
+            </select>
+          </th>
+        </tr>
+        <tr>
+          <th>Harga</th>
+          <th><input type="number" id="harga-barang" disabled></th>
+        </tr>
+        <tr>
+          <th>Jumlah Beli</th>
+          <th><input type="number" id="jumlah-beli" value="0" onchange="hitungTotal()"></th>
+        </tr>
+        <tr>
+          <th>Jumlah Total</th>
+          <th><input type="text" id="total" disabled></th>
+        </tr>
+        <tr>
+          <th>Pembayaran</th>
+          <th><input type="number" id="bayar" onchange="hitungKembalian()"></th>
+        </tr>
+        <tr>
+          <th>Kembalian</th>
+          <th><input type="text" id="kembalian" disabled></th>
+        </tr>
+        <tr>
+          <th><button type="button" onclick="cetakStruk()">CETAK</button></th>
+        </tr>
+      </table>
+    </form>
+    <!-- Teks yang bergerak untuk menarik perhatian -->
+    <marquee scrolldelay="100" direction="left" bgcolor="coral"> ~ Melayani Sepenuh Hati ~ </marquee>
+  </div>
+
+  <div id="invoice" style="display: none;">
+    <div class="header">
+      <!-- Header untuk bagian invoice -->
+      <h1 class="Judul">Invoice</h1>
+      <br>
+      <!-- Konten invoice akan ditampilkan di sini -->
+      <div id="invoice-content"></div>
+    </div>
+  </div>
+
+  <script>
+    // Fungsi untuk memperbarui harga berdasarkan pilihan barang
+    function updateHarga() {
+      var namaBarang = document.getElementById('nama-barang').value;
+      var harga;
+
+      switch (namaBarang) {
+        case 'Sepatu':
+          harga = 50000;
+          break;
+        case 'Kaus':
+          harga = 20000;
+          break;
+        case 'Topi':
+          harga = 7000;
+          break;
+        default:
+          harga = 0;
+          break;
+      }
+
+      // Menampilkan harga yang dipilih pada input harga
+      document.getElementById('harga-barang').value = harga;
+      // Menghitung ulang total setelah memperbarui harga
+      hitungTotal();
+    }
+
+    // Fungsi untuk menghitung total pembelian
+    function hitungTotal() {
+      var harga = parseFloat(document.getElementById('harga-barang').value);
+      var jumlah = parseInt(document.getElementById('jumlah-beli').value);
+      var total = harga * jumlah;
+      // Menampilkan total pada input jumlah total
+      document.getElementById('total').value = total.toFixed(2);
+    }
+
+    // Fungsi untuk menghitung kembalian
+    function hitungKembalian() {
+      var total = parseFloat(document.getElementById('total').value);
+      var bayar = parseFloat(document.getElementById('bayar').value);
+      var kembalian = bayar - total;
+      // Menampilkan kembalian pada input kembalian
+      document.getElementById('kembalian').value = kembalian.toFixed(2);
+    }
+
+    // Fungsi untuk mencetak struk pembelian
+    function cetakStruk() {
+      var namaBarang = document.getElementById('nama-barang').value;
+      var harga = parseFloat(document.getElementById('harga-barang').value);
+      var jumlah = parseInt(document.getElementById('jumlah-beli').value);
+      var total = parseFloat(document.getElementById('total').value);
+      var bayar = parseFloat(document.getElementById('bayar').value);
+      var kembalian = parseFloat(document.getElementById('kembalian').value);
+
+      // Memeriksa apakah semua field diisi dengan benar sebelum mencetak struk
+      if (namaBarang === "" || isNaN(harga) || isNaN(jumlah) || isNaN(total) || isNaN(bayar) || isNaN(kembalian)) {
+        alert("Semua field harus diisi dengan benar!");
+        return;
+      }
+
+      // Menyusun isi struk pembelian
+      var struk =
+        "<h2>Struk Pembelian</h2>" +
+        "<p><strong>Nama Barang:</strong> " + namaBarang + "</p>" +
+        "<p><strong>Harga:</strong> Rp" + harga.toFixed(2) + "</p>" +
+        "<p><strong>Jumlah:</strong> " + jumlah + "</p>" +
+        "<p><strong>Total:</strong> Rp" + total.toFixed(2) + "</p>" +
+        "<p><strong>Pembayaran:</strong> Rp" + bayar.toFixed(2) + "</p>" +
+        "<p><strong>Kembalian:</strong> Rp" + kembalian.toFixed(2) + "</p>";
+
+      // Menampilkan struk pembelian dan mencetaknya
+      document.getElementById('invoice-content').innerHTML = struk;
+      document.getElementById('invoice').style.display = 'block';
+      window.print();
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,105 @@
+/* Kasir.css */
+
+/* Mengatur agar semua teks berada di tengah */
+* {
+    text-align: center;
+}
+
+/* Mengatur tata letak dan gaya dasar dari halaman */
+body {
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    background-color: #4040c4; /* Warna latar belakang */
+}
+
+/* Mengatur tata letak dan gaya judul */
+.Judul {
+    text-align: center;
+}
+
+/* Mengatur tata letak dan gaya dari bagian header */
+.header {
+    width: 80%;
+    margin: 20px auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+      "title title"
+      "logo form"
+      "marquee marquee";
+    gap: 10px;
+    border: 2px solid black; /* Garis tepi */
+}
+
+/* Mengatur tata letak dan gaya dari logo */
+.logo {
+    grid-area: logo;
+    margin-top: 50px;
+    max-height: 20px;
+}
+
+/* Mengatur tata letak dan gaya dari formulir */
+form {
+    background-color: #9CF1C3; /* Warna latar belakang */
+}
+
+/* Mengatur tata letak dan gaya dari judul header */
+.header h1 {
+    grid-area: title;
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 20px;
+    color: #000000; /* Warna teks */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Bayangan teks */
+}
+
+/* Mengatur tata letak dan gaya dari elemen th di header */
+.header th:nth-child(1) {
+    text-align: left;
+    padding-right: 10px;
+}
+
+/* Mengatur tata letak dan gaya dari elemen th di header */
+.header th:nth-child(2) {
+    text-align: left;
+    padding-left: 10px;
+}
+
+/* Mengatur gaya dari input teks dan angka */
+input[type="text"],
+input[type="number"] {
+    width: calc(100% - 20px);
+    padding: 5px;
+    border: 1px solid #ccc; /* Warna garis tepi */
+    border-radius: 5px; /* Sudut lengkung */
+}
+
+/* Mengatur gaya dari tombol input */
+input[type="button"] {
+    padding: 10px 20px;
+    border: 1px solid #ccc; /* Warna garis tepi */
+    border-radius: 5px; /* Sudut lengkung */
+    cursor: pointer;
+}
+
+/* Mengatur tampilan tombol input saat dihover */
+input[type="button"]:hover {
+    background-color: #6b3838; /* Warna latar belakang saat dihover */
+}
+
+/* Mengatur ukuran gambar logo */
+.logo img {
+    width: 100px; /* Sesuaikan ukuran gambar dengan kebutuhan */
+    height: auto; /* Menjaga proporsi aspek */
+}
+
+/* CSS untuk konten invoice */
+#invoice-content{
+    text-align: left; /* Rata kiri */
+}
